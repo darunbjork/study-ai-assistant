@@ -1,13 +1,12 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
-import { User, AuthContextType } from '../types';
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+import { useState, type ReactNode } from 'react';
+import type { User } from '../types';
+import { AuthContext } from './AuthContext';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const login = (email: string, password: string): boolean => {
+  const login = (email: string): boolean => {
     console.log('Login attempt:', email);
     
     const mockUser: User = {
@@ -25,7 +24,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return true;
   };
 
-  const signup = (name: string, email: string, password: string): boolean => {
+  const signup = (name: string, email: string): boolean => {
     console.log('Signup attempt:', name, email);
     
     const newUser: User = {
@@ -65,11 +64,3 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     </AuthContext.Provider>
   );
 }
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within AuthProvider');
-  }
-  return context;
-};
