@@ -1,18 +1,46 @@
 import { useState } from 'react';
 
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`;
+
 function Study() {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleAsk = async () => {
-    console.log('Asking:', question);
+    if (!question.trim()) return;
+    
     setLoading(true);
-    // Mock response for now
-    setTimeout(() => {
-      setAnswer(`Mock response to: ${question}`);
+    
+    try {
+      const requestBody = {
+        contents: [
+          {
+            parts: [
+              { text: `You are a helpful study assistant. Answer this question clearly and concisely: ${question}` }
+            ]
+          }
+        ]
+      };
+
+      const response = await fetch(GEMINI_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      const data = await response.json();
+      const aiResponse = data.candidates[0].content.parts[0].text;
+      setAnswer(aiResponse);
+    } catch (error) {
+      console.error('AI Error:', error);
+      setAnswer('Sorry, I encountered an error. Please try again.');
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   return (
