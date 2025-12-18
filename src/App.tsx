@@ -1,16 +1,22 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Profile from './pages/Profile';
+import Study from './pages/Study';
 
 function App() {
   return (
     <Router>
-      <div>
-        <h1>Study AI Assistant</h1>
+      <Navbar />
+      <div style={{ padding: '2rem' }}>
         <Routes>
-          <Route path="/" element={<div>Home Page</div>} />
-          <Route path="/login" element={<div>Login Page</div>} />
-          <Route path="/signup" element={<div>Signup Page</div>} />
-          <Route path="/profile" element={<div>Profile Page</div>} />
-          <Route path="/study" element={<div>Study Page</div>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/study" element={<Study />} />
         </Routes>
       </div>
     </Router>
