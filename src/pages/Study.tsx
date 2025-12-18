@@ -24,16 +24,21 @@ function Study() {
         ]
       };
 
-      const response = await fetch(GEMINI_API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      });
-
-      const data = await response.json();
-      const aiResponse = data.candidates[0].content.parts[0].text;
+          console.log('GEMINI_API_KEY:', GEMINI_API_KEY ? 'Present' : 'Missing');
+          console.log('GEMINI_API_URL:', GEMINI_API_URL);
+          console.log('Request Body:', requestBody);
+          const response = await fetch(GEMINI_API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestBody),
+          });
+      
+          console.log('Raw API Response:', response); // Log the raw response object
+      
+          const data = await response.json();
+          console.log('Parsed API Data:', data); // Log the parsed JSON data      const aiResponse = data.candidates[0].content.parts[0].text;
       setAnswer(aiResponse);
     } catch (error) {
       console.error('AI Error:', error);
