@@ -13,19 +13,19 @@ function Navbar() {
       backgroundColor: '#6b7280',
       color: 'white'
     }}>
-      <Link to="/">Study AI Assistant</Link>
+      <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>Study AI Assistant</Link>
       
       <div>
         {!auth.isAuthenticated ? (
           <>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
+            <Link to="/login" style={{ textDecoration: 'none', color: 'white', marginLeft: '1rem' }}>Login</Link>
+            <Link to="/signup" style={{ textDecoration: 'none', color: 'white', marginLeft: '1rem' }}>Signup</Link>
           </>
         ) : (
           <>
-            <Link to="/study">Study</Link>
-            <Link to="/profile">Profile</Link>
-            <button onClick={auth.logout}>Logout</button>
+            <Link to="/study" style={{ textDecoration: 'none', color: 'white', marginLeft: '1rem' }}>Study</Link>
+            <Link to="/profile" style={{ textDecoration: 'none', color: 'white', marginLeft: '1rem' }}>Profile</Link>
+            <button onClick={auth.logout} style={{ marginLeft: '1rem' }}>Logout</button>
           </>
         )}
       </div>
