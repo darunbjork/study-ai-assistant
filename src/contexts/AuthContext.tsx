@@ -45,8 +45,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsAuthenticated(false);
   };
 
+  const updateProfile = (updatedData: Partial<User>) => {
+    setUser(prev => prev ? { ...prev, ...updatedData } : null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, signup, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, login, signup, logout, updateProfile }}>
       {children}
     </AuthContext.Provider>
   );
