@@ -12,7 +12,7 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <div style={{ padding: '2rem' }}>
+      <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         <Routes>
           <Route path="/" element={<Card><Home /></Card>} />
           <Route path="/login" element={<Card><Login /></Card>} />
