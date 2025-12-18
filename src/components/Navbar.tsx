@@ -5,7 +5,14 @@ function Navbar() {
   const auth = useAuth();
   
   return (
-    <nav>
+    <nav style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: '1rem 2rem',
+      backgroundColor: '#4f46e5',
+      color: 'white'
+    }}>
       <Link to="/">Study AI Assistant</Link>
       
       <div>
