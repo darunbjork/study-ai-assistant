@@ -1,11 +1,10 @@
-import React from 'react';
-
-const Home = () => {
+function Home() {
   return (
     <div>
-      <h2>Home Page</h2>
+      <h1>Welcome to Study AI Assistant</h1>
+      <p>Your personal AI-powered study companion</p>
     </div>
   );
-};
+}
 
 export default Home;
