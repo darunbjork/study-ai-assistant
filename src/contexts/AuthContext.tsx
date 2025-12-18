@@ -40,8 +40,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return true;
   };
 
+  const logout = () => {
+    setUser(null);
+    setIsAuthenticated(false);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, signup }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, login, signup, logout }}>
       {children}
     </AuthContext.Provider>
   );
