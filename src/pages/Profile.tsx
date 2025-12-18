@@ -14,6 +14,19 @@ function Profile() {
       <h2>Profile</h2>
       <p>Welcome, {auth.user.name}</p>
       <p>Email: {auth.user.email}</p>
+
+      <div>
+        <h3>Edit Profile</h3>
+        <input 
+          type="text"
+          value={editName}
+          onChange={(e) => setEditName(e.target.value)}
+          placeholder="Your name"
+        />
+        <button onClick={() => auth.updateProfile({ name: editName })}>
+          Update Name
+        </button>
+      </div>
     </div>
   );
 }
