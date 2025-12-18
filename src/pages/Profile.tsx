@@ -1,11 +1,21 @@
-import React from 'react';
+import { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 
-const Profile = () => {
+function Profile() {
+  const auth = useAuth();
+  const [editName, setEditName] = useState(auth.user?.name || '');
+
+  if (!auth.user) {
+    return <div>Please log in to view profile</div>;
+  }
+
   return (
     <div>
-      <h2>Profile Page</h2>
+      <h2>Profile</h2>
+      <p>Welcome, {auth.user.name}</p>
+      <p>Email: {auth.user.email}</p>
     </div>
   );
-};
+}
 
 export default Profile;
