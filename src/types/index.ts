@@ -1,13 +1,20 @@
-export interface Quiz {
-  id: number;
+export interface NewQuiz {
   title: string;
+  description: string;
+  questions: QuizQuestion[];
+}
+
+export interface Quiz extends NewQuiz {
+  id: number;
   date: string;
+  userId: number;
 }
 
 export interface QuizQuestion {
+  id: number;
   question: string;
-  options: { [key: string]: string }; // e.g., { A: "Option A text", B: "Option B text" }
-  correctAnswer: string;
+  options: string[];
+  correctAnswer: number; // index of correct option (0-3)
 }
 
 export interface User {
@@ -15,6 +22,7 @@ export interface User {
   name: string;
   email: string;
   quizzes: Quiz[];
+  createdQuizzes?: Quiz[]; // Quizzes the user has created
 }
 
 export interface AuthContextType {
