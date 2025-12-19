@@ -33,4 +33,7 @@ export interface AuthContextType {
   logout: () => void;
   updateProfile: (updatedData: Partial<User>) => void;
   deleteQuiz: (quizId: number) => void;
+  addCreatedQuiz: (quizData: NewQuiz) => void;
+  updateQuiz: (quizId: number, updatedQuiz: Partial<Quiz>) => void;
+  deleteCreatedQuiz: (quizId: number) => void;
 }

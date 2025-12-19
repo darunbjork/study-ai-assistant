@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react';
-import type { User } from '../types';
+import type { User, NewQuiz, Quiz } from '../types';
 import { AuthContext } from './AuthContext';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -13,10 +13,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       id: 1,
       name: 'Student User',
       email: email,
-      quizzes: [
-        { id: 1, title: 'JavaScript Basics', date: '2024-03-01' },
-        { id: 2, title: 'React Hooks', date: '2024-03-10' }
-      ]
+      quizzes: [],
+      createdQuizzes: [],
     };
     
     setUser(mockUser);
@@ -58,8 +56,61 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  // Add this function
+  const addCreatedQuiz = (quizData: NewQuiz) => {
+    const newQuiz: Quiz = {
+      ...quizData,
+      id: Date.now(),
+      date: new Date().toISOString().split('T')[0], // Format: YYYY-MM-DD
+      userId: user?.id || 0,
+    };
+    
+    setUser(prev => {
+      if (!prev) return null;
+      return {
+        ...prev,
+        createdQuizzes: [...(prev.createdQuizzes || []), newQuiz]
+      };
+    });
+  };
+
+  // Add this function
+  const updateQuiz = (quizId: number, updatedQuiz: Partial<Quiz>) => {
+    setUser(prev => {
+      if (!prev) return null;
+      return {
+        ...prev,
+        createdQuizzes: prev.createdQuizzes?.map(quiz => 
+          quiz.id === quizId ? { ...quiz, ...updatedQuiz } : quiz
+        )
+      };
+    });
+  };
+
+  // Add this function
+  const deleteCreatedQuiz = (quizId: number) => {
+    setUser(prev => {
+      if (!prev) return null;
+      return {
+        ...prev,
+        createdQuizzes: prev.createdQuizzes?.filter(quiz => quiz.id !== quizId)
+      };
+    });
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, signup, logout, updateProfile, deleteQuiz }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      isAuthenticated,
+      login,
+      signup,
+      logout,
+      updateProfile,
+      deleteQuiz,
+      addCreatedQuiz,      // Add this
+      updateQuiz,          // Add this
+      deleteCreatedQuiz    // Add this
+    }}>
       {children}
     </AuthContext.Provider>
   );
