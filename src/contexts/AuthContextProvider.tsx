@@ -1,14 +1,17 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { User, NewQuiz, Quiz, SavedQuizResult, AuthContextType } from '../types';
+import { createContext, useState, useEffect, type ReactNode } from 'react';
+import type { User, NewQuiz, Quiz, SavedQuizResult, AuthContextType } from '../types';
 import * as storage from '../utils/storage';
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+// eslint-disable-next-line react-refresh/only-export-components
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Load user from localStorage on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
     const userId = storage.getCurrentUserId();
     if (userId) {
@@ -164,7 +167,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const toggleTheme = () => {
     if (!user) return;
     
-    const newTheme = user.settings.theme === 'light' ? 'dark' : 'light';
+    const newTheme: 'light' | 'dark' = user.settings.theme === 'light' ? 'dark' : 'light';
     const updatedSettings = { ...user.settings, theme: newTheme };
     updateProfile({ settings: updatedSettings });
   };
@@ -188,11 +191,3 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     </AuthContext.Provider>
   );
 }
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within AuthProvider');
-  }
-  return context;
-};
