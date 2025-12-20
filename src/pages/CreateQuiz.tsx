@@ -173,7 +173,7 @@ function CreateQuiz() {
           <ul style={{ listStyleType: 'none', padding: 0 }}>
             {quizData.questions.map((q, index) => (
               <li 
-                key={q.id} 
+                key={index} 
                 style={{ 
                   borderBottom: '1px solid #eee', 
                   paddingBottom: '12px',

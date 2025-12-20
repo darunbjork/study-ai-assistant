@@ -10,13 +10,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Load user from localStorage on mount
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
     const userId = storage.getCurrentUserId();
     if (userId) {
       const foundUser = storage.findUserById(userId);
       if (foundUser) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setUser(foundUser);
         setIsAuthenticated(true);
       }
