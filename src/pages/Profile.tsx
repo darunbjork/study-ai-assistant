@@ -55,9 +55,6 @@ function Profile() {
           <h1 style={{ fontSize: '32px', marginBottom: '8px' }}>Profile</h1>
           <p style={{ color: '#666' }}>Welcome back, {auth.user.name}!</p>
         </div>
-        <Button onClick={auth.toggleTheme} variant="secondary">
-          {auth.user.settings.theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
-        </Button>
       </div>
 
       {/* Stats Cards */}
