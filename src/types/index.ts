@@ -1,15 +1,3 @@
-export interface NewQuiz {
-  title: string;
-  description: string;
-  questions: QuizQuestion[];
-}
-
-export interface Quiz extends NewQuiz {
-  id: number;
-  date: string;
-  userId: number;
-}
-
 export interface QuizQuestion {
   id: number;
   question: string;
@@ -17,12 +5,51 @@ export interface QuizQuestion {
   correctAnswer: number; // index of correct option (0-3)
 }
 
+export interface NewQuiz {
+  title: string;
+  description: string;
+  questions: Omit<QuizQuestion, 'id'>[];
+}
+
+export interface Quiz extends NewQuiz {
+  id: number;
+  date: string;
+  userId: number;
+  source: 'ai' | 'manual'; // Track if quiz was AI-generated or manually created
+  noteText?: string; // Store original note for AI-generated quizzes
+}
+
+export interface UserAnswer {
+  questionId: number;
+  question: string;
+  selectedAnswer: number;
+  correctAnswer: number;
+  isCorrect: boolean;
+}
+
+export interface SavedQuizResult {
+  id: number;
+  quizId: number;
+  quizTitle: string;
+  score: number;
+  totalQuestions: number;
+  percentage: number;
+  answers: UserAnswer[];
+  date: string;
+}
+
+export interface UserSettings {
+  theme: 'light' | 'dark';
+}
+
 export interface User {
   id: number;
   name: string;
   email: string;
-  quizzes: Quiz[];
-  createdQuizzes?: Quiz[]; // Quizzes the user has created
+  password: string;
+  quizzes: SavedQuizResult[]; // Changed from Quiz[] to SavedQuizResult[]
+  createdQuizzes: Quiz[];
+  settings: UserSettings;
 }
 
 export interface AuthContextType {
@@ -36,4 +63,6 @@ export interface AuthContextType {
   addCreatedQuiz: (quizData: NewQuiz) => void;
   updateQuiz: (quizId: number, updatedQuiz: Partial<Quiz>) => void;
   deleteCreatedQuiz: (quizId: number) => void;
+  saveQuizResult: (result: Omit<SavedQuizResult, 'id' | 'date'>) => void;
+  toggleTheme: () => void;
 }
