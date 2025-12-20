@@ -3,15 +3,14 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react';
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   variant?: 'primary' | 'secondary' | 'danger' | 'success';
+  size?: 'sm' | 'md' | 'lg'; // Add this line
 }
 
-function Button({ children, variant = 'primary', ...props }: ButtonProps) {
+function Button({ children, variant = 'primary', size = 'md', ...props }: ButtonProps) {
   const baseStyle = {
-    padding: '0.5rem 1rem',
     border: 'none',
     borderRadius: '0.25rem',
     cursor: 'pointer',
-    fontSize: '1rem',
   };
 
   const variants = {
@@ -33,9 +32,24 @@ function Button({ children, variant = 'primary', ...props }: ButtonProps) {
     },
   };
 
+  const sizeStyles = {
+    sm: {
+      padding: '0.3rem 0.6rem',
+      fontSize: '0.8rem',
+    },
+    md: {
+      padding: '0.5rem 1rem',
+      fontSize: '1rem',
+    },
+    lg: {
+      padding: '0.7rem 1.4rem',
+      fontSize: '1.2rem',
+    },
+  };
+
   return (
     <button 
-      style={{ ...baseStyle, ...variants[variant] }}
+      style={{ ...baseStyle, ...variants[variant], ...sizeStyles[size] }}
       {...props}
     >
       {children}
