@@ -1,0 +1,33 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #6b7280;
+  color: white;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: white;
+  margin-left: 1rem;
+}
+
+.navbar-create-quiz-link {
+  color: white; 
+  text-decoration: none;
+  margin: 0 16px;
+}
+
+.navbar-button {
+  margin-left: 1rem;
+}
+
+.navbar-logout-button {
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}

@@ -1,9 +1,12 @@
-Part 7: UPDATE NAVBAR is complete.
+I have fixed the dark mode text visibility issues for the placeholder text in the `Study` page.
 
 <br>
-Here's a summary of the changes:
-- Added a "Create Quiz" link to the authenticated section of the Navbar in `src/components/Navbar.tsx`, allowing logged-in users to navigate to the quiz creation page.
+
+Here is a summary of the changes:
 
 <br>
-Step 7.1 done - Quiz creation feature complete!
-Now, I am ready for the next instruction.
+
+- Added dark mode styles to `Study.css` for `.study-textarea::placeholder` and `.study-input::placeholder` to ensure the placeholder text is visible against dark backgrounds.
+
+<br>
+I will now commit the changes.
